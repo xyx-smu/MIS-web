@@ -1,0 +1,123 @@
+<!-- <nz-layout class="app-layout">
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
+        <h1>Ant Design Of Angular</h1>
+      </a>
+    </div>
+    <ul
+      nz-menu
+      *ngFor="let menu of menus"
+      nzTheme="dark"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
+      <li nz-submenu nzOpen [nzTitle]="menu.title" [nzIcon]="menu.icon"></li>
+      <ul nz-menu-item nzMatchRouter *ngFor="let menuChild of menu.children">
+        <a [routerLink]="menuChild.path"
+          ><i nz-icon [nzType]="menuChild.icon"></i
+          ><span>{{ menuChild.title }}</span></a
+        >
+      </ul>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <i
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          ></i>
+        </span>
+      </div>
+    </nz-header>
+    <nz-content>
+      <app-tab></app-tab>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout> -->
+
+<nz-layout class="app-layout">
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
+        <h1>MIS-system</h1>
+      </a>
+    </div>
+
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'">
+      <ng-container *ngTemplateOutlet="menuTpl"></ng-container>
+      <ng-template #menuTpl>
+        <ng-container *ngFor="let menu of menus">
+          <ng-container *ngIf="menu.children && menu.children.length > 0">
+            <li
+              nz-submenu
+              (nzOpenChange)="changeOpen(menu, menus)"
+              [(nzOpen)]="menu.open"
+            >
+              <span title>
+                <i nz-icon [nzType]="menu.icon"></i>
+                <span class="nav-text">{{ menu.title }}</span>
+              </span>
+              <ul>
+                <ng-container *ngFor="let menuSecond of menu.children">
+                  <li
+                    nz-menu-item
+                    [nzSelected]="menuSecond.selected"
+                    *ngIf="
+                      !menuSecond.children || menuSecond.children.length === 0
+                    "
+                  >
+                    <a [routerLink]="[menuSecond.path]">
+                      <span>{{ menuSecond.title }}</span>
+                    </a>
+                  </li>
+                </ng-container>
+              </ul>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ng-template>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <i
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          ></i>
+        </span>
+      </div>
+    </nz-header>
+    <nz-content>
+      <app-tab></app-tab>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

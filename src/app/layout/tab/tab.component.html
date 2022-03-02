@@ -1,0 +1,27 @@
+<nz-tabset
+  (nzClose)="clickCloseIcon($event)"
+  [nzSelectedIndex]="currSelectedIndexTab"
+  [nzTabBarStyle]="{ margin: '10px 0 0 0', height: '35px' }"
+  [nzTabPosition]="'top'"
+  [nzType]="'card'"
+>
+  <nz-tab
+    (nzClick)="goPage(tab.path)"
+    nzClosable
+    [nzTitle]="titleTemplate"
+    *ngFor="let tab of tabs; index as i; trackBy: trackByTab"
+  >
+    <ng-template #titleTemplate>
+      <div>
+        {{ tab.title }}
+        <i
+          nz-icon
+          nzType="close"
+          nzTheme="outline"
+          (click)="closeTab(tab, $event, i)"
+          style="transform: scale(0.8); margin-right: 0"
+        ></i>
+      </div>
+    </ng-template>
+  </nz-tab>
+</nz-tabset>

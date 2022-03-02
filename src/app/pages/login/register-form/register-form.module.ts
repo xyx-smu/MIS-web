@@ -1,0 +1,10 @@
+import { NgModule } from '@angular/core';
+import { RegisterFormRoutingModule } from './register-form-routing.module';
+import { RegisterFormComponent } from './register-form.component';
+import { SharedModule } from 'src/app/share/shared.module';
+
+@NgModule({
+  declarations: [RegisterFormComponent],
+  imports: [SharedModule, RegisterFormRoutingModule],
+})
+export class RegisterFormModule {}
