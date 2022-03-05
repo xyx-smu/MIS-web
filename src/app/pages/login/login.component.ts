@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Circle } from 'src/app/model/type';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Subject } from "rxjs";
+import { Circle } from "src/app/models/type";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.less"],
 })
 export class LoginComponent implements OnDestroy, OnInit {
   circleArr: Circle[] = [];
@@ -19,8 +19,8 @@ export class LoginComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     //设置定时器每20毫秒更新和渲染
     let mySetInterval: any;
-    const canvas = <HTMLCanvasElement>document.getElementById('mycanvas');
-    const ctx = canvas.getContext('2d');
+    const canvas = <HTMLCanvasElement>document.getElementById("mycanvas");
+    const ctx = canvas.getContext("2d");
     mySetInterval = setInterval(() => {
       ctx!.clearRect(0, 0, this.reWidth, this.reHeight);
       for (var i = 0; i < this.circleArr.length; i++) {
@@ -35,11 +35,11 @@ export class LoginComponent implements OnDestroy, OnInit {
     circle.y = y;
     circle.r = r;
     circle.color =
-      'rgb(' +
+      "rgb(" +
       (Math.random() * 240 + 9) +
-      ',' +
+      "," +
       (Math.random() * 220 + 18) +
-      ',203)';
+      ",203)";
     //随机方向
     circle.dx = Math.random() * 12 - 7;
     circle.dy = Math.random() * 12 - 7;
@@ -49,8 +49,8 @@ export class LoginComponent implements OnDestroy, OnInit {
 
   // 渲染
   render(circle: any) {
-    const canvas = <HTMLCanvasElement>document.getElementById('mycanvas');
-    const ctx = canvas.getContext('2d');
+    const canvas = <HTMLCanvasElement>document.getElementById("mycanvas");
+    const ctx = canvas.getContext("2d");
     //新建一条路径
     ctx!.beginPath();
     //创建一个圆
@@ -82,8 +82,8 @@ export class LoginComponent implements OnDestroy, OnInit {
     this.addCircle(event.clientX, event.clientY, 20);
     // 获取当前窗口大小
     this.reHeight =
-      document.getElementsByClassName('container')[0].clientHeight;
-    this.reWidth = document.getElementsByClassName('container')[0].clientWidth;
+      document.getElementsByClassName("container")[0].clientHeight;
+    this.reWidth = document.getElementsByClassName("container")[0].clientWidth;
   }
 
   ngOnDestroy(): void {

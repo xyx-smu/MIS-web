@@ -1,20 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { MenuNav } from '../model/menu';
-import { Menu } from '../model/type';
-import { TabService } from '../services/tab.service';
-import { filter, map, mergeMap, takeUntil, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { MenuNav } from "../models/menu";
+import { Menu } from "../models/type";
+import { TabService } from "../services/tab.service";
+import { filter, map, mergeMap, takeUntil, tap } from "rxjs/operators";
+import { Subject } from "rxjs";
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.less'],
+  selector: "app-layout",
+  templateUrl: "./layout.component.html",
+  styleUrls: ["./layout.component.less"],
 })
 export class LayoutComponent implements OnDestroy, OnInit {
   isCollapsed = false;
   menus: Menu[] = MenuNav;
-  routerPath: string = '';
+  routerPath: string = "";
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -64,9 +64,9 @@ export class LayoutComponent implements OnDestroy, OnInit {
       return;
     }
     const index =
-      this.routerPath.indexOf('?') === -1
+      this.routerPath.indexOf("?") === -1
         ? this.routerPath.length
-        : this.routerPath.indexOf('?');
+        : this.routerPath.indexOf("?");
     const routePath = this.routerPath.substring(0, index);
     for (const item of menus) {
       item.open = false;

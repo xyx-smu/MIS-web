@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { ActivatedRoute, Router } from '@angular/router';
-import { TabModel } from 'src/app/model/type';
-import { SimpleReuseStrategy } from '../utils/reuse-strategy';
+import { ActivatedRoute, Router } from "@angular/router";
+import { TabModel } from "src/app/models/type";
+import { SimpleReuseStrategy } from "../utils/reuse-strategy";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class TabService {
   private _tabArray: TabModel[] = [];
@@ -65,15 +65,15 @@ export class TabService {
 
   // 点击tab标签上x图标删除tab的动作,右键删除当前tab动作
   fnFormatePath = function formatePath(path: string): string {
-    const newpath = path.replace(/\/[0-9]+/g, '');
+    const newpath = path.replace(/\/[0-9]+/g, "");
     const paramIndex = newpath
-      .substring(newpath.lastIndexOf('/') + 1)
-      .indexOf('?');
+      .substring(newpath.lastIndexOf("/") + 1)
+      .indexOf("?");
     if (paramIndex > -1) {
-      const tempPath = newpath.substring(newpath.lastIndexOf('/') + 1);
+      const tempPath = newpath.substring(newpath.lastIndexOf("/") + 1);
       return tempPath.substring(0, paramIndex);
     } else {
-      return newpath.substring(newpath.lastIndexOf('/') + 1);
+      return newpath.substring(newpath.lastIndexOf("/") + 1);
     }
   };
 }

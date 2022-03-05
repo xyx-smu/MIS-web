@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { LoginService } from 'src/app/services/login.service';
-import { ValidatorsService } from 'src/app/services/validators/validators.service';
+} from "@angular/forms";
+import { Router } from "@angular/router";
+import { NzMessageService } from "ng-zorro-antd/message";
+import { LoginService } from "src/app/services/login.service";
+import { ValidatorsService } from "src/app/services/validators/validators.service";
 
 @Component({
-  selector: 'app-register-form',
-  templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.less'],
+  selector: "app-register-form",
+  templateUrl: "./register-form.component.html",
+  styleUrls: ["./register-form.component.less"],
 })
 export class RegisterFormComponent implements OnInit {
   validateForm!: FormGroup;
@@ -26,8 +26,8 @@ export class RegisterFormComponent implements OnInit {
     private router: Router
   ) {
     this.validateForm = this.fb.group({
-      loginName: [null, [Validators.required]],
-      userName: [null, [Validators.required]],
+      username: [null, [Validators.required]],
+      realName: [null, [Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
       email: [null, [Validators.email, Validators.required]],
@@ -42,12 +42,12 @@ export class RegisterFormComponent implements OnInit {
     if (this.validateForm.valid) {
       this.service.register(this.validateForm.value).subscribe((res) => {
         console.log(res);
-        if (res.code == 1000) {
-          this.msg.create('success', `注册成功`);
+        if (res.code == 0) {
+          this.msg.create("success", `注册成功`);
           this.validateForm.reset();
-          this.router.navigateByUrl('login/login-form');
+          this.router.navigateByUrl("login/login-form");
         } else {
-          this.msg.create('error', `注册失败,失败的原因是` + res.message);
+          this.msg.create("error", `注册失败,失败的原因是` + res.message);
         }
       });
       console.log(this.validateForm.value);

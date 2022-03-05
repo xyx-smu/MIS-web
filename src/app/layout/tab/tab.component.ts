@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TabModel } from 'src/app/model/type';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { TabModel } from "src/app/models/type";
 
-import { TabService } from '../../services/tab.service';
+import { TabService } from "../../services/tab.service";
 
 @Component({
-  selector: 'app-tab',
-  templateUrl: './tab.component.html',
-  styleUrls: ['./tab.component.less'],
+  selector: "app-tab",
+  templateUrl: "./tab.component.html",
+  styleUrls: ["./tab.component.less"],
 })
 export class TabComponent implements OnInit {
   get tabs(): TabModel[] {

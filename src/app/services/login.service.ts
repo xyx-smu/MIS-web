@@ -1,17 +1,31 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { loginUrl, registerUrl } from '../base-url';
-import { Result } from '../model/result';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { loginUrl, registerUrl } from "../base-urls";
+import { accessTokenKey, refreshTokenKey } from "../models/constant";
+import { Result } from "../models/result";
+import { LocalStorageService } from "./local-storage.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class LoginService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private localStorageService: LocalStorageService,
+    private router: Router
+  ) {}
 
-  login(user: any) {
-    return this.http.post<Result<any>>(loginUrl, user);
+  login(userInfo: any) {
+    return this.http.post<Result<any>>(loginUrl, userInfo);
   }
+
+  logout() {
+    this.localStorageService.removeItem(accessTokenKey);
+    this.localStorageService.removeItem(refreshTokenKey);
+    this.router.navigate(["/login/login-form"]);
+  }
+
   register(user: any) {
     return this.http.post<Result<any>>(registerUrl, user);
   }

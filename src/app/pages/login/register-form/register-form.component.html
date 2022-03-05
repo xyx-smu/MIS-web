@@ -4,19 +4,19 @@
     <h2 class="register-text">注册</h2>
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="loginName" nzRequired>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username" nzRequired>
           <span>用户名</span>
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入用户名!">
-          <input nz-input id="loginName" formControlName="loginName" />
+          <input nz-input id="username" formControlName="username" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="userName" nzRequired>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="realName" nzRequired>
           <span>姓名</span>
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入姓名!">
-          <input nz-input id="userName" formControlName="userName" />
+          <input nz-input id="realName" formControlName="realName" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
