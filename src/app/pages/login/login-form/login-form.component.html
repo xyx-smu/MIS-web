@@ -32,6 +32,26 @@
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="请输入验证码!">
+          <nz-input-group>
+            <input
+              style="max-width: 170px"
+              type="text"
+              nz-input
+              formControlName="verifyCode"
+              placeholder="请输入验证码"
+            />
+          </nz-input-group>
+        </nz-form-control>
+        <canvas
+          id="verify-code"
+          [width]="contentWidth"
+          [height]="contentHeight"
+          (click)="createdCode()"
+        ></canvas>
+      </nz-form-item>
+
       <div nz-row class="login-form-margin">
         <div nz-col [nzSpan]="12">
           <a class="login-form-forgot">忘记密码</a>

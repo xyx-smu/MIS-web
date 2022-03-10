@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginFormComponent } from './login-form.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { LoginFormComponent } from "./login-form.component";
 
 const routes: Routes = [
   {
-    path: '',
-    data: { key: 'login-form', shouldDetach: 'no' },
+    path: "",
+    data: { key: "login-form", shouldDetach: "no" },
     component: LoginFormComponent,
   },
 ];
