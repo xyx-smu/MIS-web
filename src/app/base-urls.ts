@@ -1,4 +1,6 @@
-export const baseUrl = "124.223.20.218:8002/";
+import { environment } from "src/environments/environment";
+
+const baseUrl = environment.baseUrl;
 
 export const loginUrl = baseUrl + "login/";
 export const tokenRefreshUrl = baseUrl + "token_refresh/";
