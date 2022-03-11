@@ -1,4 +1,4 @@
-export const baseUrl = "http://127.0.0.1:8000/";
+export const baseUrl = "124.223.20.218:8002/";
 
 export const loginUrl = baseUrl + "login/";
 export const tokenRefreshUrl = baseUrl + "token_refresh/";
