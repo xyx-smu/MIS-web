@@ -16,7 +16,8 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
 
   // 验证码
   identifyCode: string = "";
-  getidentifyCode: string = "";
+  getUpperidentifyCode: string = "";
+  getLoweridentifyCode: string = "";
   contentWidth: number = 100;
   contentHeight: number = 30;
   fontSizeMin: number = 25;
@@ -29,8 +30,8 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
   lineColorMax: number = 255;
   dotColorMin: number = 0;
   dotColorMax: number = 255;
-  canvasWidth: number = 110;
-  canvasHeight: number = 35;
+  canvasWidth: number = 100;
+  canvasHeight: number = 30;
 
   constructor(
     private fb: FormBuilder,
@@ -52,12 +53,16 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {}
 
   submitForm(): void {
-    if (this.validateForm.value.verifyCode != this.getidentifyCode) {
+    if (
+      this.validateForm.value.verifyCode != this.getUpperidentifyCode &&
+      this.validateForm.value.verifyCode != this.getLoweridentifyCode
+    ) {
       this.msg.create("error", "验证码错误");
     }
     if (
       this.validateForm.valid &&
-      this.validateForm.value.verifyCode == this.getidentifyCode
+      (this.validateForm.value.verifyCode == this.getUpperidentifyCode ||
+        this.validateForm.value.verifyCode == this.getLoweridentifyCode)
     ) {
       const userInfo = {
         username: this.validateForm.value.username,
@@ -104,7 +109,8 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
       codeList.push(chars.charAt(Math.floor(Math.random() * charsLen)));
     }
     this.identifyCode = codeList.join("");
-    this.getidentifyCode = this.identifyCode.toLowerCase();
+    this.getLoweridentifyCode = this.identifyCode.toLowerCase();
+    this.getUpperidentifyCode = this.identifyCode;
     this.drawPic();
   }
 

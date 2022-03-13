@@ -1,7 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { loginUrl, registerUrl } from "../base-urls";
+import {
+  checkUsernameUrl,
+  loginUrl,
+  registerUrl,
+  setPasswordUrl,
+  verifyInfoUrl,
+} from "../base-urls";
 import { accessTokenKey, refreshTokenKey } from "../models/constant";
 import { Result } from "../models/result";
 import { LocalStorageService } from "./local-storage.service";
@@ -28,5 +34,17 @@ export class LoginService {
 
   register(user: any) {
     return this.http.post<Result<any>>(registerUrl, user);
+  }
+
+  checkUsername(username: any) {
+    return this.http.post<Result<any>>(checkUsernameUrl, username);
+  }
+
+  verifyInfo(userInfo: any) {
+    return this.http.post<Result<any>>(verifyInfoUrl, userInfo);
+  }
+
+  setPassword(pswInfo: any) {
+    return this.http.post<Result<any>>(setPasswordUrl, pswInfo);
   }
 }

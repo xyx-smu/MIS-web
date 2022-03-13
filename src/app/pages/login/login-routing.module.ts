@@ -1,28 +1,35 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { LoginComponent } from "./login.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: LoginComponent,
-    data: { key: 'login', shouldDetach: 'no' },
+    data: { key: "login", shouldDetach: "no" },
     children: [
       {
-        path: 'login-form',
+        path: "login-form",
         loadChildren: () =>
-          import('./login-form/login-form.module').then(
+          import("./login-form/login-form.module").then(
             (m) => m.LoginFormModule
           ),
       },
       {
-        path: 'register-form',
+        path: "register-form",
         loadChildren: () =>
-          import('./register-form/register-form.module').then(
+          import("./register-form/register-form.module").then(
             (m) => m.RegisterFormModule
           ),
       },
-      { path: '', redirectTo: '/login/login-form', pathMatch: 'full' },
+      {
+        path: "forget-form",
+        loadChildren: () =>
+          import("./forget-form/forget-form.module").then(
+            (m) => m.ForgetFormModule
+          ),
+      },
+      { path: "", redirectTo: "/login/login-form", pathMatch: "full" },
     ],
   },
 ];

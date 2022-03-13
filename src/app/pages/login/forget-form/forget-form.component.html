@@ -1,0 +1,158 @@
+<div class="forget-card">
+  <div class="forget-background"></div>
+  <div class="forget-content">
+    <nz-steps nzSize="small">
+      <nz-step
+        nzTitle="选择账号"
+        [nzStatus]="chooseuser"
+        nzIcon="user"
+      ></nz-step>
+      <nz-step
+        nzTitle="身份验证"
+        [nzStatus]="verifyuser"
+        nzIcon="solution"
+      ></nz-step>
+      <nz-step
+        nzTitle="修改密码"
+        [nzStatus]="setpsw"
+        nzIcon="setting"
+      ></nz-step>
+      <nz-step nzTitle="完成" [nzStatus]="done" nzIcon="check-circle"></nz-step>
+    </nz-steps>
+
+    <div class="steps-content">
+      <div class="step-one" *ngIf="current === 0">
+        <div class="input-account-title">请输入账号</div>
+        <div class="input-account-content">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              placeholder="用户名"
+              [(ngModel)]="username"
+            />
+          </nz-input-group>
+        </div>
+      </div>
+      <div class="step-two" *ngIf="current === 1">
+        <div class="verify-title">
+          为保护帐号安全，找回密码需要进行资料辅助验证。只有当你提供的资料足够真实完整，才能通过验证。
+        </div>
+        <div class="verify-content">
+          <form
+            nz-form
+            [formGroup]="validateForm"
+            class="verify-form"
+            (ngSubmit)="submitForm()"
+          >
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="realName" nzRequired>
+                <span>你的真实姓名</span>
+              </nz-form-label>
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="请输入真实姓名!"
+              >
+                <input nz-input id="realName" formControlName="realName" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzFor="phoneNumber"
+                nzRequired
+              >
+                <span>你的手机号码</span>
+              </nz-form-label>
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="请输入正确的手机号码!"
+              >
+                <input
+                  nz-input
+                  id="phoneNumber"
+                  formControlName="phoneNumber"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>
+                <span>你的电子邮箱</span>
+              </nz-form-label>
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="请输入正确的邮箱!"
+              >
+                <input nz-input id="email" formControlName="email" />
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </div>
+      </div>
+      <div class="step-three" *ngIf="current === 2">
+        <div class="set-psw-title">设置新密码</div>
+        <div class="set-psw-content">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              placeholder="请输入新密码"
+              [(ngModel)]="newpsw"
+            />
+          </nz-input-group>
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              placeholder="请再次输入新密码"
+              [(ngModel)]="checknewpsw"
+            />
+          </nz-input-group>
+        </div>
+      </div>
+      <div class="step-four" *ngIf="current === 3">
+        <nz-result nzStatus="success" nzTitle="密码修改成功"> </nz-result>
+      </div>
+    </div>
+    <div class="steps-action">
+      <button
+        [disabled]="!this.username"
+        nz-button
+        nzType="primary"
+        (click)="next()"
+        *ngIf="current === 0"
+      >
+        <span>下一步</span>
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        (click)="submitForm()"
+        *ngIf="current === 1"
+      >
+        <span>提交</span>
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="!this.newpsw || !this.checknewpsw"
+        (click)="confirm()"
+        *ngIf="current === 2"
+      >
+        <span>确定</span>
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        [routerLink]="['/login/login-form']"
+        *ngIf="current === 3"
+      >
+        <span>去登录</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NzMessageService } from "ng-zorro-antd/message";
+import { LoginService } from "src/app/services/login.service";
+import { ValidatorsService } from "src/app/services/validators/validators.service";
+
+@Component({
+  selector: "app-forget-form",
+  templateUrl: "./forget-form.component.html",
+  styleUrls: ["./forget-form.component.less"],
+})
+export class ForgetFormComponent implements OnInit {
+  current: number = 0;
+  username: string = "";
+  newpsw: string = "";
+  checknewpsw: string = "";
+  chooseuser: string = "process"; // 选择账号的状态
+  verifyuser: string = "wait"; // 身份验证的状态
+  setpsw: string = "wait"; // 修改密码的状态
+  done: string = "wait"; // 完成的状态
+  validateForm!: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private validate: ValidatorsService,
+    private msg: NzMessageService,
+    private service: LoginService
+  ) {
+    this.validateForm = this.fb.group({
+      realName: [null, [Validators.required]],
+      phoneNumber: [null, [Validators.required, this.validate.tel]],
+      email: [null, [Validators.email, Validators.required]],
+    });
+  }
+
+  ngOnInit(): void {}
+
+  next(): void {
+    const userInfo = { username: this.username };
+    this.service.checkUsername(userInfo).subscribe({
+      next: () => {
+        this.chooseuser = "finish";
+        this.verifyuser = "process";
+        this.current += 1;
+      },
+      error: (e) => {
+        console.error(e);
+      },
+      complete: () => {
+        console.log("complete");
+      },
+    });
+  }
+
+  submitForm() {
+    if (this.validateForm.valid) {
+      this.validateForm.value["username"] = this.username;
+      const userInfo = this.validateForm.value;
+      this.service.verifyInfo(userInfo).subscribe({
+        next: () => {
+          this.verifyuser = "finish";
+          this.setpsw = "process";
+          this.current += 1;
+        },
+        error: (e) => console.error(e),
+        complete: () => console.log("complete"),
+      });
+    } else {
+      Object.values(this.validateForm.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+  confirm() {
+    if (this.newpsw !== this.checknewpsw) {
+      this.msg.create("error", "两次密码输入不一致");
+    } else {
+      const pswInfo = {
+        username: this.username,
+        password: this.checknewpsw,
+      };
+      this.service.setPassword(pswInfo).subscribe({
+        next: () => {
+          this.setpsw = "finish";
+          this.done = "process";
+          this.current += 1;
+        },
+        error: (e) => console.error(e),
+        complete: () => {
+          console.log("complete");
+        },
+      });
+    }
+  }
+}

@@ -34,9 +34,8 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-control nzErrorTip="请输入验证码!">
-          <nz-input-group>
+          <nz-input-group style="max-width: 170px" nzPrefixIcon="code">
             <input
-              style="max-width: 170px"
               type="text"
               nz-input
               formControlName="verifyCode"
@@ -54,7 +53,9 @@
 
       <div nz-row class="login-form-margin">
         <div nz-col [nzSpan]="12">
-          <a class="login-form-forgot">忘记密码</a>
+          <a class="login-form-forgot" [routerLink]="['/login/forget-form']"
+            >忘记密码</a
+          >
         </div>
         <div nz-col [nzSpan]="12">
           <a class="register" [routerLink]="['/login/register-form']">注册</a>
