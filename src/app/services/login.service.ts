@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import {
   checkUsernameUrl,
+  getEmailCodeUrl,
   loginUrl,
   registerUrl,
   setPasswordUrl,
@@ -40,8 +41,12 @@ export class LoginService {
     return this.http.post<Result<any>>(checkUsernameUrl, username);
   }
 
-  verifyInfo(userInfo: any) {
-    return this.http.post<Result<any>>(verifyInfoUrl, userInfo);
+  getEmailCode(userInfo: any) {
+    return this.http.post<Result<any>>(getEmailCodeUrl, userInfo);
+  }
+
+  verifyInfo(emailInfo: any) {
+    return this.http.post<Result<any>>(verifyInfoUrl, emailInfo);
   }
 
   setPassword(pswInfo: any) {

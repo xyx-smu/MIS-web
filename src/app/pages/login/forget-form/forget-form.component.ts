@@ -12,6 +12,7 @@ import { ValidatorsService } from "src/app/services/validators/validators.servic
 export class ForgetFormComponent implements OnInit {
   current: number = 0;
   username: string = "";
+  currCount: number = 60;
   newpsw: string = "";
   checknewpsw: string = "";
   chooseuser: string = "process"; // 选择账号的状态
@@ -27,9 +28,8 @@ export class ForgetFormComponent implements OnInit {
     private service: LoginService
   ) {
     this.validateForm = this.fb.group({
-      realName: [null, [Validators.required]],
-      phoneNumber: [null, [Validators.required, this.validate.tel]],
       email: [null, [Validators.email, Validators.required]],
+      emailCode: [null, [Validators.required]],
     });
   }
 
@@ -52,11 +52,41 @@ export class ForgetFormComponent implements OnInit {
     });
   }
 
+  getEmailCode() {
+    const userInfo = {
+      username: this.username,
+      email: this.validateForm.value.email,
+    };
+    this.service.getEmailCode(userInfo).subscribe({
+      next: (res) => {
+        if (res.code == 0) {
+          this.msg.create("success", `验证码已发送，请查收邮件！`);
+        }
+        let a = <HTMLButtonElement>document.getElementById("getEmailCode");
+        a.setAttribute("disabled", "true"); //设置按钮为禁用状态
+        a.textContent = this.currCount + "秒后重获"; //更改按钮文字
+        let InterValObj = window.setInterval(() =>
+          //timer变量，控制时间
+          {
+            if (this.currCount == 0) {
+              window.clearInterval(InterValObj); // 停止计时器
+              a.removeAttribute("disabled"); //移除禁用状态改为可用
+              a.textContent = "重获验证码";
+            } else {
+              this.currCount--;
+              a.textContent = this.currCount + "秒后重获";
+            }
+          }, 1000); // 启动计时器timer处理函数，1秒执行一次
+      },
+      error: (e) => console.error(e),
+      complete: () => console.log("complete"),
+    });
+  }
+
   submitForm() {
     if (this.validateForm.valid) {
-      this.validateForm.value["username"] = this.username;
-      const userInfo = this.validateForm.value;
-      this.service.verifyInfo(userInfo).subscribe({
+      const emailInfo = this.validateForm.value;
+      this.service.verifyInfo(emailInfo).subscribe({
         next: () => {
           this.verifyuser = "finish";
           this.setpsw = "process";
@@ -74,6 +104,7 @@ export class ForgetFormComponent implements OnInit {
       });
     }
   }
+
   confirm() {
     if (this.newpsw !== this.checknewpsw) {
       this.msg.create("error", "两次密码输入不一致");

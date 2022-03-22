@@ -39,45 +39,7 @@
           为保护帐号安全，找回密码需要进行资料辅助验证。只有当你提供的资料足够真实完整，才能通过验证。
         </div>
         <div class="verify-content">
-          <form
-            nz-form
-            [formGroup]="validateForm"
-            class="verify-form"
-            (ngSubmit)="submitForm()"
-          >
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="realName" nzRequired>
-                <span>你的真实姓名</span>
-              </nz-form-label>
-              <nz-form-control
-                [nzSm]="14"
-                [nzXs]="24"
-                nzErrorTip="请输入真实姓名!"
-              >
-                <input nz-input id="realName" formControlName="realName" />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label
-                [nzSm]="6"
-                [nzXs]="24"
-                nzFor="phoneNumber"
-                nzRequired
-              >
-                <span>你的手机号码</span>
-              </nz-form-label>
-              <nz-form-control
-                [nzSm]="14"
-                [nzXs]="24"
-                nzErrorTip="请输入正确的手机号码!"
-              >
-                <input
-                  nz-input
-                  id="phoneNumber"
-                  formControlName="phoneNumber"
-                />
-              </nz-form-control>
-            </nz-form-item>
+          <form nz-form [formGroup]="validateForm" class="verify-form">
             <nz-form-item>
               <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>
                 <span>你的电子邮箱</span>
@@ -88,6 +50,37 @@
                 nzErrorTip="请输入正确的邮箱!"
               >
                 <input nz-input id="email" formControlName="email" />
+              </nz-form-control>
+              <button
+                style="margin-left: 10px"
+                nz-button
+                id="getEmailCode"
+                nzType="primary"
+                (click)="getEmailCode()"
+              >
+                获取验证码
+              </button>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzFor="emailCode"
+                nzRequired
+              >
+                <span>邮箱验证码</span>
+              </nz-form-label>
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="请输入验证码!"
+              >
+                <input
+                  nz-input
+                  style="max-width: 150px"
+                  id="emailCode"
+                  formControlName="emailCode"
+                />
               </nz-form-control>
             </nz-form-item>
           </form>

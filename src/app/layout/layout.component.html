@@ -1,55 +1,3 @@
-<!-- <nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-  >
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-        <h1>Ant Design Of Angular</h1>
-      </a>
-    </div>
-    <ul
-      nz-menu
-      *ngFor="let menu of menus"
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-    >
-      <li nz-submenu nzOpen [nzTitle]="menu.title" [nzIcon]="menu.icon"></li>
-      <ul nz-menu-item nzMatchRouter *ngFor="let menuChild of menu.children">
-        <a [routerLink]="menuChild.path"
-          ><i nz-icon [nzType]="menuChild.icon"></i
-          ><span>{{ menuChild.title }}</span></a
-        >
-      </ul>
-    </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <i
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></i>
-        </span>
-      </div>
-    </nz-header>
-    <nz-content>
-      <app-tab></app-tab>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-  </nz-layout>
-</nz-layout> -->
-
 <nz-layout class="app-layout">
   <nz-sider
     class="menu-sidebar"
@@ -60,10 +8,8 @@
     [nzTrigger]="null"
   >
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-        <h1>MIS-system</h1>
-      </a>
+      <img src="../../assets/logo.svg" alt="logo" />
+      <h1>M I S</h1>
     </div>
 
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'">
@@ -90,6 +36,7 @@
                     "
                   >
                     <a [routerLink]="[menuSecond.path]">
+                      <i nz-icon [nzType]="menuSecond.icon"></i>
                       <span>{{ menuSecond.title }}</span>
                     </a>
                   </li>

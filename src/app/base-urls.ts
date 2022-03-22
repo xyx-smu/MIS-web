@@ -6,5 +6,6 @@ export const loginUrl = baseUrl + "login/";
 export const tokenRefreshUrl = baseUrl + "token_refresh/";
 export const registerUrl = baseUrl + "register/";
 export const checkUsernameUrl = baseUrl + "check_username/";
+export const getEmailCodeUrl = baseUrl + "get_email_code/";
 export const verifyInfoUrl = baseUrl + "verify_info/";
 export const setPasswordUrl = baseUrl + "set_password/";
