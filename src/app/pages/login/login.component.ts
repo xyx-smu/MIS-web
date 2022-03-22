@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { Circle } from "src/app/models/type";
 
@@ -14,17 +15,21 @@ export class LoginComponent implements OnDestroy, OnInit {
   reWidth: number = 1440;
 
   private destroy$ = new Subject<void>();
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
+    console.log(this.router.url.startsWith("/login"));
     //设置定时器每20毫秒更新和渲染
-    let mySetInterval: any;
     const canvas = <HTMLCanvasElement>document.getElementById("mycanvas");
     const ctx = canvas.getContext("2d");
-    mySetInterval = setInterval(() => {
-      ctx!.clearRect(0, 0, this.reWidth, this.reHeight);
-      for (var i = 0; i < this.circleArr.length; i++) {
-        this.update(this.circleArr[i]) && this.render(this.circleArr[i]);
+    let mySetInterval = setInterval(() => {
+      if (this.router.url.startsWith("/login")) {
+        ctx!.clearRect(0, 0, this.reWidth, this.reHeight);
+        for (var i = 0; i < this.circleArr.length; i++) {
+          this.update(this.circleArr[i]) && this.render(this.circleArr[i]);
+        }
+      } else {
+        clearInterval(mySetInterval);
       }
     }, 20);
   }
