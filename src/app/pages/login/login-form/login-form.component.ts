@@ -70,7 +70,6 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
       };
       this.service.login(userInfo).subscribe({
         next: (res) => {
-          console.log("next", res);
           this.localStorageService.setItem("username", res.data.username);
           this.localStorageService.setItem(accessTokenKey, res.data.access);
           this.localStorageService.setItem(refreshTokenKey, res.data.refresh);

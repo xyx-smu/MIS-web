@@ -18,7 +18,6 @@ export class LoginComponent implements OnDestroy, OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.router.url.startsWith("/login"));
     //设置定时器每20毫秒更新和渲染
     const canvas = <HTMLCanvasElement>document.getElementById("mycanvas");
     const ctx = canvas.getContext("2d");
