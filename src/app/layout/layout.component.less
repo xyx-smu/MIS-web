@@ -17,8 +17,7 @@
 }
 
 .header-trigger {
-  height: 64px;
-  padding: 20px 24px;
+  padding-left: 24px;
   font-size: 20px;
   cursor: pointer;
   transition: all 0.3s, padding 0s;
@@ -57,16 +56,42 @@
 
 nz-header {
   padding: 0;
+  height: 50px;
   width: 100%;
   z-index: 2;
 }
 
 .app-header {
   position: relative;
-  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
   padding: 0;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+  .top-setting {
+    height: 100%;
+    margin-right: 40px;
+
+    .setting-content {
+      padding: 12px 20px;
+    }
+  }
+  .top-setting:hover {
+    background-color: rgba(0, 0, 0, 0.025);
+  }
+}
+
+.setting-menu {
+  i {
+    padding-right: 10px;
+    color: black;
+  }
+  span {
+    color: black;
+  }
 }
 
 nz-content {
@@ -76,5 +101,19 @@ nz-content {
 .inner-content {
   padding: 24px;
   background: #fff;
-  height: 100%;
+}
+
+.verify-text {
+  padding-bottom: 20px;
+}
+
+.set-psw-content {
+  nz-input-group {
+    padding-bottom: 10px;
+    max-width: 240px;
+  }
+}
+
+.next-btn {
+  text-align: center;
 }

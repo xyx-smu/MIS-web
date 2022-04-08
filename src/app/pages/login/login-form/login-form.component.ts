@@ -71,6 +71,7 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
       this.service.login(userInfo).subscribe({
         next: (res) => {
           this.localStorageService.setItem("username", res.data.username);
+          this.localStorageService.setItem("realName", res.data.real_name);
           this.localStorageService.setItem(accessTokenKey, res.data.access);
           this.localStorageService.setItem(refreshTokenKey, res.data.refresh);
           if (res.code == 0) {
