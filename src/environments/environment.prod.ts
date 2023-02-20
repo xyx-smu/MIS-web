@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: "http://lazygo.xyz:8012/",
+  baseUrl: "http://lazygo.xyz:8011/",
 };
